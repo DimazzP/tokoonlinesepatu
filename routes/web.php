@@ -5,7 +5,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DaftarProdukController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 // routes/web.php
+Route::get('/', [LandingPageController::class, 'latesproduct']);
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
@@ -52,6 +55,9 @@ Route::get('/admin/pesanan', function () {
 Route::get('/admin/pengaturan', function () {
     return view('admin.pengaturan');
 })->name('admin.pengaturan');
+Route::get('/test', function () {
+    return view('test');
+})->name('admin.pengaturan');
 Route::resource('products', ProductController::class);
 
 // Menampilkan daftar produk
@@ -77,3 +83,5 @@ Route::delete('/products/{product}', 'ProductController@destroy')->name('product
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
+
+Route::post('/upload/image', TestController::class);
